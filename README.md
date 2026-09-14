@@ -9,8 +9,9 @@ The `main` branch holds the source of the repository. The `gh-pages` branch is t
 
 ## Structure
 
-- `index.html` — CV page markup (Part 2: HTML, CSS & Git Basics)
-- `style.css` — CV page styles (Part 2: HTML, CSS & Git Basics)
+- `index.html` — CV page markup
+- `style.css` — CV page styles
+- `assets/` — photo and course logo
 - `cv.md` — CV in Markdown (Part 1: Markdown & Git)
 - `README.md` — this file
 
