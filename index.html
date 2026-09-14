@@ -3,25 +3,129 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="CV of Aleksandr Lerko, fullstack developer">
+    <meta name="description" content="CV of Aleksandr Lerko, fullstack developer based in Tallinn, Estonia">
     <title>Aleksandr Lerko &mdash; CV</title>
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <header class="header">
-      <h1 class="header__name">Aleksandr Lerko</h1>
-      <p class="header__role">Fullstack Developer</p>
-    </header>
+    <div class="page">
+      <header class="header">
+        <img class="header__photo" src="assets/avatar.jpg" width="460" height="460" alt="Portrait of Aleksandr Lerko">
 
-    <main class="content">
-      <section class="section">
-        <h2 class="section__title">About</h2>
-        <p>Markup and styles are added in Part 3.</p>
-      </section>
-    </main>
+        <div class="header__intro">
+          <h1 class="header__name">Aleksandr Lerko</h1>
+          <p class="header__role">Fullstack Developer &middot; Tallinn, Estonia</p>
 
-    <footer class="footer">
-      <p>The Rolling Scopes School, 2026</p>
-    </footer>
+          <nav class="nav" aria-label="Sections of this CV">
+            <ul class="nav__list">
+              <li class="nav__item"><a class="nav__link" href="#contacts">Contacts</a></li>
+              <li class="nav__item"><a class="nav__link" href="#about">About</a></li>
+              <li class="nav__item"><a class="nav__link" href="#skills">Skills</a></li>
+              <li class="nav__item"><a class="nav__link" href="#code">Code</a></li>
+              <li class="nav__item"><a class="nav__link" href="#experience">Experience</a></li>
+              <li class="nav__item"><a class="nav__link" href="#education">Education</a></li>
+              <li class="nav__item"><a class="nav__link" href="#english">English</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <main class="content">
+        <section class="section" id="contacts">
+          <h2 class="section__title">Contacts</h2>
+          <ul class="contacts">
+            <li class="contacts__item">Tallinn, Estonia</li>
+            <li class="contacts__item"><a href="mailto:alexandr.lerko@gmail.com">alexandr.lerko@gmail.com</a></li>
+            <li class="contacts__item"><a href="https://github.com/allerk">github.com/allerk</a></li>
+            <li class="contacts__item"><a href="https://www.linkedin.com/in/aleksandr-lerko-a34863209/">linkedin.com/in/aleksandr-lerko</a></li>
+          </ul>
+        </section>
+
+        <section class="section" id="about">
+          <h2 class="section__title">About</h2>
+          <p>I build web applications end to end &mdash; from the database schema and the API to the interface a user actually clicks. I graduated in IT Systems Development at TalTech and started in backend-heavy work with C#/.NET and Java before moving towards the full stack.</p>
+          <p>Today I am most productive in TypeScript: SvelteKit and React on the front, Node.js and Cloudflare Workers on the back, PostgreSQL or D1 underneath. What I care about in a codebase is explicit data flow, typed boundaries, migrations that can be replayed from zero, and environments that do not leak into each other. I prefer shipping a narrow feature that is fully wired &mdash; validation, error states, deployment &mdash; over a broad one that is half done.</p>
+        </section>
+
+        <section class="section" id="skills">
+          <h2 class="section__title">Skills</h2>
+          <ul class="skills">
+            <li class="skills__item">TypeScript, JavaScript, C#, Java, Python, SQL</li>
+            <li class="skills__item">Svelte 5 / SvelteKit, React</li>
+            <li class="skills__item">HTML5, CSS3, Tailwind CSS</li>
+            <li class="skills__item">Node.js, Cloudflare Workers</li>
+            <li class="skills__item">ASP.NET Core, Spring Boot</li>
+            <li class="skills__item">PostgreSQL, Cloudflare D1, Drizzle ORM</li>
+            <li class="skills__item">Git, Vite, Docker, Vitest, GitHub Actions</li>
+          </ul>
+        </section>
+
+        <section class="section" id="code">
+          <h2 class="section__title">Code Example</h2>
+          <p>A typed request de-duplicator: concurrent callers asking for the same key share one in-flight promise instead of stampeding the API.</p>
+          <pre class="code"><code>type Loader&lt;T&gt; = () =&gt; Promise&lt;T&gt;;
+
+const inflight = new Map&lt;string, Promise&lt;unknown&gt;&gt;();
+
+export function dedupe&lt;T&gt;(key: string, load: Loader&lt;T&gt;): Promise&lt;T&gt; {
+  const running = inflight.get(key);
+  if (running) return running as Promise&lt;T&gt;;
+
+  const promise = load().finally(() =&gt; inflight.delete(key));
+  inflight.set(key, promise);
+  return promise;
+}</code></pre>
+        </section>
+
+        <section class="section" id="experience">
+          <h2 class="section__title">Experience</h2>
+
+          <article class="entry">
+            <h3 class="entry__title">Intern Software Engineer &mdash; GrabCAD / Stratasys, Tallinn</h3>
+            <p>Internal web tooling for the additive manufacturing platform: feature work across the stack, bug triage and code review inside an established engineering process.</p>
+          </article>
+
+          <article class="entry">
+            <h3 class="entry__title">DPFLAB &mdash; trilingual site and admin panel</h3>
+            <p>SvelteKit 2 and Svelte 5 on Cloudflare Workers, Drizzle ORM over D1, images in R2, admin area behind Cloudflare Access. A three-step qualifying form with server-side validation feeds a request pipeline with statuses and loss reasons; Meta Pixel and the Conversions API share event IDs for deduplication. Separate local, develop and production environments.</p>
+          </article>
+
+          <article class="entry">
+            <h3 class="entry__title">Nullam &mdash; .NET technical assignment for RIK</h3>
+            <p>Event and participant management for the Estonian Centre of Registers and Information Systems: C# backend with a TypeScript frontend.</p>
+          </article>
+
+          <article class="entry">
+            <h3 class="entry__title">Getpart companies aggregator &mdash; thesis prototype</h3>
+            <p>Aggregator of auto-parts suppliers: Python scrapers feeding a JavaScript service.</p>
+          </article>
+        </section>
+
+        <section class="section" id="education">
+          <h2 class="section__title">Education</h2>
+          <ul class="education">
+            <li class="education__item"><strong>Tallinn University of Technology (TalTech)</strong> &mdash; IT Systems Development. Coursework archived on GitHub: JavaScript (2022), Distributed Systems in C# (2022), C# (2021).</li>
+            <li class="education__item"><strong>The Rolling Scopes School</strong> &mdash; Fullstack Engineering, in progress. Previously completed the React and Node.js modules.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="english">
+          <h2 class="section__title">English</h2>
+          <p><strong>B2 &mdash; Upper-Intermediate.</strong> Daily working language: documentation, code review, technical assignments and correspondence. Comfortable in written communication and technical discussion, continuing to work on spoken fluency.</p>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <ul class="footer__links">
+          <li class="footer__item"><a href="https://github.com/allerk">github.com/allerk</a></li>
+          <li class="footer__item">2026</li>
+          <li class="footer__item">
+            <a class="footer__logo-link" href="https://rs.school/">
+              <img class="footer__logo" src="assets/rs-school-logo.svg" width="110" height="41" alt="The Rolling Scopes School">
+            </a>
+          </li>
+        </ul>
+      </footer>
+    </div>
   </body>
 </html>
