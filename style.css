@@ -37,6 +37,11 @@ a:focus {
   text-decoration: underline;
 }
 
+a:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
 p {
   margin: 0 0 1rem;
 }
@@ -230,5 +235,26 @@ p:last-child {
 
   .header__name {
     font-size: 1.75rem;
+  }
+}
+
+@media print {
+  body {
+    padding: 0;
+    background-color: var(--color-background);
+  }
+
+  .page {
+    max-width: none;
+    border: none;
+  }
+
+  .nav,
+  .footer {
+    display: none;
+  }
+
+  a {
+    color: var(--color-text);
   }
 }
